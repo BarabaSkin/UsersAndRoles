@@ -3,17 +3,17 @@ using Npgsql;
 
 namespace UsersAndRoles.Repositories
 {
-    class UserRepository : User
+    class UserRepository
     {
-        string connectionString = "Host=localhost;Port=10000;Username=postgres;Password=12345;Database=UsersAnsRoles";
+        string connectionString = "Host=localhost;Port=10000;Username=postgres;Password=12345;Database=UsersAndRoles";
         public List<User> GetUsers()
         {
-            List<User> users = new List<User>();
-            using (Npgsql.NpgsqlConnection db = new NpgsqlConnection(connectionString))
+            var users = new List<User>();
+
+            using (NpgsqlConnection db = new NpgsqlConnection(connectionString))
             {
                 users = db.Query<User>("Select * from users").ToList();
             }
-            Console.WriteLine(users.ToString());
             return users;
         }
     }
