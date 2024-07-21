@@ -1,7 +1,10 @@
-﻿namespace UsersAndRoles
+﻿using Npgsql;
+using Dapper;
+
+namespace UsersAndRoles
 {
     internal class User
     {
-        public string user { get; set; }
+        string user {  get; set; }
     }
 }

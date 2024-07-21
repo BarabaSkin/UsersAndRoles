@@ -1,7 +1,8 @@
 ﻿namespace UsersAndRoles
 {
-    internal class UserRole
+    public class UserAndRole
     {
-
+        public string User {  get; set; }
+        public string Role {  get; set; }
     }
 }

@@ -1,11 +1,38 @@
-﻿using UsersAndRoles.Repositories;
+﻿using UsersAndRoles;
+using UsersAndRoles.Repositories;
 
-var userRep = new UserRepository();
-var userList = userRep.GetUsers();
-for (int i = 0; i < userList.Count; i++)
+List<UserAndRole> usersAndRoles = new List<UserAndRole>();
+var userRoleFromDb = new UserRoleRepository();
+
+usersAndRoles = userRoleFromDb.GetUserRole();
+
+
+for (int i = 0; i < usersAndRoles.Count; i++)
 {
-    Console.WriteLine(userList[i].user);
+    var user = usersAndRoles[i].User;
+    Console.WriteLine(user + " has roles: ");
+    foreach (var users in usersAndRoles)
+    {
+        if(users.User == user)
+        {
+            Console.Write(users.Role + " ");
+        }
+    }
+    Console.WriteLine("\n");
 }
 
 
+for (int i = 0; i < usersAndRoles.Count; i++)
+{
+    var role = usersAndRoles[i].Role;
+    var count = 0;
+    foreach (var users in usersAndRoles)
+    {
+        if (users.Role == role)
+        {
+            count ++;
+        }
+    }
+    Console.WriteLine(count + " users has role " + role);
+}
 
