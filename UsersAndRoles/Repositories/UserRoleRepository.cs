@@ -7,6 +7,11 @@ namespace UsersAndRoles.Repositories
     {
         public List<UserAndRole> GetUserRole()
         {
+            // TODO:
+            // 1) если у меня нет локально бд, то как мне проверить ваше приложение? ответ - никак
+            // 2) строки подключения лучше держать в конфигах 
+            // 3) по код стайлу, лучше придерживаться одного стиля во всем проекте,
+            // т.е вы либо объявляете все переменные неявно (через var), либо явно (пример: string connectionString)
             string connectionString = "Host=localhost;Port=10000;Username=postgres;Password=12345;Database=UsersAndRoles";
             var userrole = new List<UserAndRole>();
 
@@ -48,10 +53,14 @@ namespace UsersAndRoles.Repositories
             List<Role> roles = new List<Role>();
             var rolesFromDb = new RoleRepository();
             roles = rolesFromDb.GetRoles();
+            // TODO: какова сложность данного алгоритма? 
+            // Что если мы будем иметь админку, где будут 150 различных ролей
+            // и миллионы пользователей?
             for (int i = 0; i < roles.Count; i++)
             {
                 var role = roles[i].role;
                 var count = 0;
+                // TODO: userS - довольно странный код стайл
                 foreach (var userS in usersAndRoles)
                 {
                     if (userS.Role == role)
